@@ -1,0 +1,30 @@
+FROM python:3.12-slim AS base
+
+# Security: run as non-root
+RUN groupadd -r sandbox && useradd -r -g sandbox -d /workspace -s /bin/bash sandbox
+
+# Install system dependencies for common Python projects
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    build-essential \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install common Python testing and linting tools
+RUN pip install --no-cache-dir \
+    pytest>=8.0 \
+    pytest-cov>=5.0 \
+    ruff>=0.5 \
+    mypy>=1.10 \
+    hypothesis>=6.100 \
+    && pip cache purge
+
+# Set up workspace
+WORKDIR /workspace
+RUN chown sandbox:sandbox /workspace
+
+# Drop privileges
+USER sandbox
+
+# Default entrypoint runs the provided script
+ENTRYPOINT ["/bin/bash"]

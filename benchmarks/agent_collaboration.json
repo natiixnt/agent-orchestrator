@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "benchmark": "agent-collaboration-metrics",
+    "eval_tasks": 300,
+    "run_date": "2025-03-14",
+    "version": "v2.0",
+    "description": "Inter-agent communication and collaboration quality metrics with v2 techniques"
+  },
+  "reviewer_performance": {
+    "total_reviews": 382,
+    "bugs_caught": 147,
+    "false_positives": 46,
+    "true_positive_rate": 0.384,
+    "false_positive_rate": 0.121,
+    "precision": 0.76,
+    "categories_caught": {
+      "logic_error": 48,
+      "missing_edge_case": 36,
+      "type_mismatch": 22,
+      "incorrect_api_usage": 18,
+      "test_regression": 13,
+      "style_only": 10
+    },
+    "avg_review_tokens": 17800,
+    "avg_review_latency_ms": 2900,
+    "notes": "fewer total reviews needed because TDD+ToT produce better first patches"
+  },
+  "researcher_performance": {
+    "total_invocations": 287,
+    "context_improved": 262,
+    "context_improvement_rate": 0.912,
+    "avg_files_identified": 4.7,
+    "avg_relevant_snippets": 8.2,
+    "context_utilization_by_coder": 0.912,
+    "wasted_research_rate": 0.052,
+    "avg_research_tokens": 21400,
+    "avg_research_latency_ms": 3800,
+    "notes": "context compression cuts research tokens by ~35% while improving coder utilization"
+  },
+  "coder_performance": {
+    "total_invocations": 318,
+    "first_attempt_success": 230,
+    "first_attempt_rate": 0.724,
+    "avg_retries": 0.28,
+    "max_retries": 2,
+    "avg_patch_size_lines": 32,
+    "avg_files_modified": 2.0,
+    "avg_coding_tokens": 36200,
+    "avg_coding_latency_ms": 6400,
+    "notes": "first attempt rate jumped from 61.5% to 72.4% thanks to TDD and compressed context"
+  },
+  "tdd_metrics": {
+    "tasks_using_tdd": 274,
+    "reproducer_test_generated": 258,
+    "test_reproduced_bug": 241,
+    "test_verified_fix": 224,
+    "avg_tdd_overhead_seconds": 12.4,
+    "patches_caught_by_test_before_sandbox": 89,
+    "notes": "TDD catches ~34% of bad patches before they reach the reviewer or sandbox"
+  },
+  "tot_metrics": {
+    "tasks_using_tot": 264,
+    "all_branches_same_approach": 74,
+    "at_least_2_different": 190,
+    "best_branch_was_low_temp": 112,
+    "best_branch_was_mid_temp": 88,
+    "best_branch_was_high_temp": 64,
+    "avg_tot_overhead_seconds": 8.2,
+    "notes": "low temp wins most often but high temp catches cases where the obvious approach is wrong"
+  },
+  "compression_metrics": {
+    "tasks_using_compression": 287,
+    "avg_compression_ratio": 0.61,
+    "avg_tokens_saved": 18400,
+    "avg_symbols_extracted": 6.8,
+    "callers_included": 2.1,
+    "callees_included": 3.4,
+    "notes": "AST extraction is deterministic and adds ~0.1s latency, basically free"
+  },
+  "coordination_metrics": {
+    "avg_messages_per_task": 5.8,
+    "avg_message_size_bytes": 1842,
+    "coordination_overhead_pct": 6.8,
+    "deadlocks": 0,
+    "timeouts": 2,
+    "coordination_failure_rate": 0.001,
+    "parallel_agent_executions": 264,
+    "sequential_handoffs": 498,
+    "notes": "ToT branches run in parallel which actually improves coordination overhead"
+  },
+  "agent_type_combinations": {
+    "researcher_coder": {"count": 38, "pass_rate": 0.74},
+    "researcher_coder_reviewer": {"count": 212, "pass_rate": 0.81},
+    "coder_reviewer": {"count": 22, "pass_rate": 0.64},
+    "researcher_coder_reviewer_coder": {"count": 28, "pass_rate": 0.75}
+  },
+  "feedback_loops": {
+    "reviewer_to_coder_iterations": {
+      "1_iteration": 212,
+      "2_iterations": 18,
+      "3_iterations": 2,
+      "max_iterations_hit": 0
+    },
+    "avg_improvement_per_iteration": 0.38,
+    "diminishing_returns_after": 2
+  }
+}

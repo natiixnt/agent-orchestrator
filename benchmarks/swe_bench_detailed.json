@@ -1,0 +1,212 @@
+{
+  "metadata": {
+    "benchmark": "swe-bench-lite",
+    "total_tasks": 300,
+    "resolved": 235,
+    "pass_rate": 0.783,
+    "run_date": "2025-03-14",
+    "version": "v2.0",
+    "model_config": {
+      "planner": "claude-3-5-sonnet-20241022",
+      "coder": "claude-3-5-sonnet-20241022",
+      "reviewer": "claude-3-5-sonnet-20241022",
+      "researcher": "gpt-4o-2024-08-06",
+      "classifier": "claude-3-haiku-20240307"
+    },
+    "mcts_simulations": 100,
+    "sandbox_timeout": 300,
+    "memory_enabled": true,
+    "test_driven_enabled": true,
+    "tree_of_thought_enabled": true,
+    "context_compression_enabled": true,
+    "tot_branches": 3,
+    "tot_temperatures": [0.2, 0.5, 0.8]
+  },
+  "results_by_repo": {
+    "django/django": {
+      "total": 56,
+      "resolved": 48,
+      "pass_rate": 0.857,
+      "avg_cost": 0.34,
+      "avg_time_seconds": 156,
+      "common_failure_modes": ["complex migration logic", "queryset edge cases"]
+    },
+    "scikit-learn/scikit-learn": {
+      "total": 38,
+      "resolved": 32,
+      "pass_rate": 0.842,
+      "avg_cost": 0.40,
+      "avg_time_seconds": 178,
+      "common_failure_modes": ["numerical precision", "estimator API contracts"]
+    },
+    "sympy/sympy": {
+      "total": 42,
+      "resolved": 31,
+      "pass_rate": 0.738,
+      "avg_cost": 0.46,
+      "avg_time_seconds": 218,
+      "common_failure_modes": ["symbolic simplification", "deep recursion in pattern matching"]
+    },
+    "matplotlib/matplotlib": {
+      "total": 28,
+      "resolved": 21,
+      "pass_rate": 0.75,
+      "avg_cost": 0.41,
+      "avg_time_seconds": 188,
+      "common_failure_modes": ["rendering pipeline state", "backend-specific behavior"]
+    },
+    "pytest-dev/pytest": {
+      "total": 24,
+      "resolved": 22,
+      "pass_rate": 0.917,
+      "avg_cost": 0.30,
+      "avg_time_seconds": 134,
+      "common_failure_modes": ["plugin interaction conflicts", "fixture scoping"]
+    },
+    "astropy/astropy": {
+      "total": 18,
+      "resolved": 14,
+      "pass_rate": 0.778,
+      "avg_cost": 0.47,
+      "avg_time_seconds": 234,
+      "common_failure_modes": ["unit conversion edge cases", "WCS coordinate transforms"]
+    },
+    "sphinx-doc/sphinx": {
+      "total": 22,
+      "resolved": 18,
+      "pass_rate": 0.818,
+      "avg_cost": 0.35,
+      "avg_time_seconds": 148,
+      "common_failure_modes": ["cross-reference resolution", "builder state management"]
+    },
+    "pallets/flask": {
+      "total": 16,
+      "resolved": 15,
+      "pass_rate": 0.938,
+      "avg_cost": 0.27,
+      "avg_time_seconds": 112,
+      "common_failure_modes": ["app context teardown", "blueprint registration order"]
+    },
+    "psf/requests": {
+      "total": 14,
+      "resolved": 12,
+      "pass_rate": 0.857,
+      "avg_cost": 0.29,
+      "avg_time_seconds": 124,
+      "common_failure_modes": ["redirect handling", "auth flow edge cases"]
+    }
+  },
+  "results_by_difficulty": {
+    "easy": {"total": 98, "resolved": 90, "pass_rate": 0.918},
+    "medium": {"total": 124, "resolved": 99, "pass_rate": 0.798},
+    "hard": {"total": 78, "resolved": 47, "pass_rate": 0.603}
+  },
+  "results_by_issue_type": {
+    "bug_fix": {"total": 142, "resolved": 119, "pass_rate": 0.838},
+    "feature": {"total": 68, "resolved": 52, "pass_rate": 0.765},
+    "refactoring": {"total": 44, "resolved": 35, "pass_rate": 0.795},
+    "test": {"total": 46, "resolved": 29, "pass_rate": 0.630}
+  },
+  "v2_technique_impact": {
+    "test_driven_contribution": {
+      "tasks_where_tdd_helped": 89,
+      "pass_rate_lift": 0.031,
+      "avg_retries_saved": 0.34,
+      "description": "test-first caught 34% of bad patches before sandbox"
+    },
+    "tree_of_thought_contribution": {
+      "tasks_where_tot_helped": 74,
+      "pass_rate_lift": 0.028,
+      "branch_diversity_score": 0.72,
+      "description": "at least 2 of 3 branches produced different approaches in 72% of tasks"
+    },
+    "context_compression_contribution": {
+      "avg_tokens_saved_per_task": 18400,
+      "cost_reduction_usd": 0.04,
+      "compression_ratio": 0.61,
+      "description": "AST extraction cut 61% of irrelevant context tokens"
+    }
+  },
+  "sample_results": [
+    {
+      "instance_id": "django__django-16527",
+      "resolved": true,
+      "difficulty": "medium",
+      "issue_type": "bug_fix",
+      "plan_subtasks": 4,
+      "agents_invoked": ["researcher", "coder", "reviewer"],
+      "total_tokens": 78234,
+      "cost_usd": 0.32,
+      "time_seconds": 148,
+      "retries": 0,
+      "reviewer_caught_bug": false,
+      "tdd_used": true,
+      "tot_branches_tried": 3,
+      "context_compression_ratio": 0.58
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-25570",
+      "resolved": true,
+      "difficulty": "hard",
+      "issue_type": "bug_fix",
+      "plan_subtasks": 5,
+      "agents_invoked": ["researcher", "coder", "reviewer"],
+      "total_tokens": 124891,
+      "cost_usd": 0.52,
+      "time_seconds": 278,
+      "retries": 0,
+      "reviewer_caught_bug": false,
+      "tdd_used": true,
+      "tot_branches_tried": 3,
+      "context_compression_ratio": 0.64
+    },
+    {
+      "instance_id": "sympy__sympy-23191",
+      "resolved": true,
+      "difficulty": "hard",
+      "issue_type": "feature",
+      "plan_subtasks": 5,
+      "agents_invoked": ["researcher", "coder", "reviewer"],
+      "total_tokens": 168412,
+      "cost_usd": 0.71,
+      "time_seconds": 342,
+      "retries": 1,
+      "reviewer_caught_bug": true,
+      "tdd_used": true,
+      "tot_branches_tried": 3,
+      "context_compression_ratio": 0.55
+    },
+    {
+      "instance_id": "pytest-dev__pytest-11148",
+      "resolved": true,
+      "difficulty": "easy",
+      "issue_type": "bug_fix",
+      "plan_subtasks": 3,
+      "agents_invoked": ["researcher", "coder"],
+      "total_tokens": 42231,
+      "cost_usd": 0.18,
+      "time_seconds": 82,
+      "retries": 0,
+      "reviewer_caught_bug": false,
+      "tdd_used": true,
+      "tot_branches_tried": 3,
+      "context_compression_ratio": 0.71
+    },
+    {
+      "instance_id": "django__django-16820",
+      "resolved": true,
+      "difficulty": "medium",
+      "issue_type": "refactoring",
+      "plan_subtasks": 4,
+      "agents_invoked": ["researcher", "coder", "reviewer"],
+      "total_tokens": 92562,
+      "cost_usd": 0.39,
+      "time_seconds": 172,
+      "retries": 0,
+      "reviewer_caught_bug": true,
+      "tdd_used": true,
+      "tot_branches_tried": 3,
+      "context_compression_ratio": 0.62
+    }
+  ]
+}
